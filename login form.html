@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="fontawesome-free-6.6.0-web/css/all.css">
+    <style>
+        form{
+            width: 40%;
+            height: 550px;
+            border-radius: 20px;
+            margin-left: 35%;
+            box-shadow: 0 0 5px black;
+        }
+        .reg{
+            width: 100%;
+            height: 80px;
+            border-top-left-radius: 20px;
+            border-top-right-radius: 20px;
+            background-color: darkblue;
+            text-align: center;
+            font-weight: bold;
+            padding-top: 20px;
+            color: white;
+        }
+        .logo{
+            width: 30px;
+            height: 30px;
+            border-radius: 100%;
+            background-color: white;
+            margin-top: 10px;
+            margin-left: 47%;
+        }
+        .logo i{
+            color: black;
+            padding-top: 5px;
+        }
+        .input{
+            margin-top: 20px;
+            position: relative;
+        }
+        .input label{
+            font-size: 20px;
+            margin-left: 20px;
+            display: block;
+        }
+        .input input{
+            width: 90%;
+            height: 30px;
+            border-radius: 5px;
+            margin-left: 20px;
+            outline: none;
+            padding-left:10px;
+        }
+        .error{
+            margin-left: 20px;
+            color: red;
+            font-weight: bold;
+            display: none;
+        }
+        .one{
+            color: red;
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            display: none;
+        }
+        .two{
+            color: green;
+            position: absolute;
+            top: 30px;
+            right: 40px;
+            display: none;
+        }
+        #butt{
+            background: none;
+            border: none;
+            margin-left: -130px;
+            font-weight: bolder;
+            color: blue;
+        }
+        .last-butt{
+            width: 80%;
+            height: 40px;
+            margin-top: 30px;
+            margin-left: 60px;
+            border-radius: 5px;
+            border: none;
+            background-color: blue;
+            color: white;
+            font-weight: bolder;
+            font-size: 15px;
+        }
+        .last-butt:hover{
+            background-color: darkblue;
+        }
+    </style>
+</head>
+<body>
+    <form action="" onsubmit="return registration()">
+
+        <div class="reg">
+            REGISTRATION PORTAL
+            <div class="logo"><i class="fa-solid fa-user"></i></div>
+        </div>
+
+        <div class="input">
+            <label for="user">Username:</label>
+            <input type="text" id="user" placeholder="Enter your Username">
+            <i class="fa-solid fa-circle-exclamation  one" ></i>
+            <i class="fa-regular fa-circle-check two"></i>
+            <div class="error">Username cannot be blank</div>
+        </div>
+
+        <div class="input">
+            <label for="email">Email</label>
+            <input type="email" id="email" placeholder="Enter your valid Email">
+            <i class="fa-solid fa-circle-exclamation  one" ></i>
+            <i class="fa-regular fa-circle-check two"></i>
+            <div class="error">Email cannot be blank</div>
+        </div>
+
+        <div class="input">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter your Password">
+            <i class="fa-solid fa-circle-exclamation  one" ></i>
+            <i class="fa-regular fa-circle-check two"></i>
+            <button type="button" onclick="seeFn()" id="butt">SHOW</button>
+            <div class="error">Password cannot be blank</div>
+        </div>
+
+        <div class="input">
+            <label for="cpassword">Confirm Password</label>
+            <input type="password" id="cpassword" placeholder="Please re-enter your Password">
+            <i class="fa-solid fa-circle-exclamation  one" ></i>
+            <i class="fa-regular fa-circle-check two"></i>
+            <button type="button" onclick="ceeFn()" class="cseefn" id="butt">SHOW</button>
+            <div class="error">Please,confirm your password</div>
+        </div>
+
+        <button type="submit" class="last-butt">Submit</button>
+    </form>
+
+    <script>
+        var user = document.getElementById("user");
+        var email = document.getElementById("email");
+        var password = document.getElementById("password");
+        var cpassword = document.getElementById("cpassword");
+        var one = document.getElementsByClassName("one");
+        var two = document.getElementsByClassName("two");
+        var error = document.getElementsByClassName("error");
+        var see = document.getElementById("butt");
+        var cee = document.getElementsByClassName("cseefn")[0];
+
+
+
+        user.addEventListener("keyup", usergo);
+        email.addEventListener("keyup", emailgo);
+        password.addEventListener("keyup", passwordgo);
+        cpassword.addEventListener("keyup", cpasswordgo);
+
+        function registration(){
+            if(user.value.trim() == ""){
+                user.focus();
+                user.style.border = "2px solid red";
+                one[0].style.display = "block";
+                two[0].style.display = "none";
+                error[0].style.display = "block";
+                return false;
+            }
+
+            else if(email.value.trim() == ""){
+                email.focus();
+                email.style.border = "2px solid red"
+                one[1].style.color = "red"
+                one[1].style.display = "block"
+                two[1].style.display = "none"
+                error[1].style.display = "block"
+                return false;
+            }
+
+            if(password.value.trim() == ""){
+                password.focus();
+                password.style.border = "2px solid red";
+                one[2].style.display = "block";
+                two[2].style.display = "none";
+                error[2].style.display = "block";
+                return false;
+            }
+            else if(password.value.length < 6){
+                password.focus();
+                password.style.border = "2px solid red"
+                one[2].style.display = "none"
+                error[2].style.display = "block"
+                error[2].innerHTML = "Password must not be less than 6 characters"
+                return false;
+            }
+
+            if(cpassword.value.trim() == ""){
+                cpassword.focus();
+                cpassword.style.border = "2px solid red";
+                one[3].style.display = "block";
+                two[3].style.display = "none";
+                error[3].style.display = "block";
+                return false;
+            }
+             else if(cpassword.value != password.value){
+                password.focus();
+                password.style.border = "2px solid red"
+                one[3].style.color = "red"
+                one[3].style.display = "block"
+                error[3].style.display = "block"
+                error[3].innerHTML = "Password must be the same"
+                return false;
+            }
+        }
+
+        function usergo(){
+            if(user.value.trim() != ""){
+                user.style.border = "2px solid green"
+                one[0].style.display = "none"
+                two[0].style.display = "block"
+                error[0].style.display = "none"
+                return true;
+            }
+        }
+
+        function emailgo(){
+            if(email.value.trim() != ""){
+                email.style.border = "2px solid green"
+                one[1].style.display = "none"
+                two[1].style.display = "block"
+                error[1].style.display = "none"
+                return true
+            }
+        }
+
+        function passwordgo(){
+            if(password.value != "" && password.value.length > 6 ){
+                password.style.border = "2px solid green"
+                one[2].style.display = "none"
+                two[2].style.display = "block"
+                error[2].style.display = "none"
+                return true;
+            }
+        }
+
+        // function passwordgo(){
+        //     if(password.value == "" && password.value.length > 6){
+        //         password.style.border = "2px solid green"
+        //         one[2].style.display = "none"
+        //         two[2].style.display = "block"
+        //         return true;
+        //     }
+        // }
+
+        function cpasswordgo(){
+            if(cpassword.value != "" && cpassword.value == password.value){
+                cpassword.style.border = "2px solid green"
+                one[3].style.display = "none"
+                two[3].style.display = "block"
+                error[3].style.display = "none"
+                return true
+            }
+        }
+
+        function seeFn(){
+            if(see.innerHTML == "SHOW"){
+                password.setAttribute("type", "text");
+                see.innerHTML = "HIDE";
+                see.style.color = "red"
+            } else if(see.innerHTML == "HIDE"){
+                password.setAttribute("type", "password");
+                see.innerHTML = "SHOW";
+                see.style.color = "blue";
+            }
+        }
+
+        function ceeFn(){
+            if(cee.innerHTML == "SHOW"){
+                cpassword.setAttribute("type", "text");
+                cee.innerHTML = "HIDE";
+                cee.style.color = "red"
+            } else if(cee.innerHTML == "HIDE"){
+                cpassword.setAttribute("type", "password");
+                cee.innerHTML = "SHOW";
+                cee.style.color = "blue";
+            }
+        }
+    </script>
+</body>
+</html>
